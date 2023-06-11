@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <title>Invoice Generator</title>
+</head>
+<body>
+   <div class="container-fluid align-items-center invoice-container">
+    <header>
+        <div class="row align-items-center">
+            <div class="col-sm-7">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" >
+            </div>
+            <div class="col-sm-5 text-right">
+                <h4 class="mb-0 text-right">Invoice</h4>
+            </div>    
+        </div>
+    </header>
+    <main>
+        <div class="row">
+            <div class="col-sm-6"><strong>Date:</strong> {{ date }}</div>
+            <div class="col-sm-6 text-right"><strong>Invoice No:</strong> {{ invoice_no }}</div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-6 text-right order-sm-1"><strong>Pay To:</strong>
+                <address>
+                    Flipkart Pvt Ltd<br>
+                    <a href="mailto:flip@text.com">flip@text.com</a>
+                </address>
+            </div>
+            <div class="col-sm-6 order-sm-0"><strong>Inviced To:</strong>
+            <address>
+                {{ name }}<br>
+                {{ place }}<br>
+                <a href="mailto:{{ mailid }}">{{ mailid }}</a>
+            </address>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table mb-0">
+                        <thead class="card-header">
+                            <tr>
+                                <td class="col-3"><strong>Item</strong></td>
+                                <td class=" text-1"><strong>Rate</strong></td>
+                                <td class=" text-center"><strong>IGST</strong></td>
+                                <td class=" text-center"><strong>QTY</strong></td>
+                                <td class=" text-right"><strong>Amount</strong></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in items %}
+                            <tr>
+                                <td class="col-3">{{ item.item }}</td>
+                                <td class=" text-1">{{ item.price }}</td>
+                                <td class=" text-center">{{ item.igst }}</td>
+                                <td class=" text-center">{{ item.qty }}</td>
+                                <td class=" text-right">{{ item.amt }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot class="card-footer">
+                            <tr>
+                                <td colspan="4" class="text-right"><strong>Sub Total:</strong></td>
+                                <td class="text-right">{{ sub_total }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-right"><strong>Tax:</strong></td>
+                                <td class="text-right">{{ tax }}</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-right"><strong>Total:</strong></td>
+                                <td class="text-right">{{ total }}</td>
+                            </tr>                            
+                        </tfoot>                       
+                    </table>
+                </div>
+            </div>
+        </div>    
+    </main>
+    <footer class="text-center mt-4">
+        <p class="text-1"><strong>NOTE:</strong> This is a computer-generated receipt and does not require a physical signature</p>
+        <div class="btn-group btn-group-sm">
+            <a href="javascript:window.print()" class="btn btn-light border text-black-50"><ion-icon name="print-outline"></ion-icon>Print</a>
+            <a href="" class="btn btn-light border text-black-50" download><ion-icon name="cloud-download-outline"></ion-icon>Download</a>
+        </div>
+    </footer>
+
+   </div>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+</body>
+</html>
