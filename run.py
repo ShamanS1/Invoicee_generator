@@ -1,3 +1,3 @@
 from invoicegenerator import app
 
-app=app()
+apps=app()
