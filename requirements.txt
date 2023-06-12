@@ -16,4 +16,4 @@ protobuf==3.20.3
 PyMySQL==1.0.3
 SQLAlchemy==2.0.15
 typing_extensions==4.6.3
-Werkzeug==2.3.5
+Werkzeug==2.2.3
